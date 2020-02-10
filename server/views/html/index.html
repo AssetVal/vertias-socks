@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Long Socks</title>
+</head>
+<body>
+
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/2.3.0/socket.io.js"></script>
+<script>
+  // Below is the dev route for when you are on localhost
+  const socket = io.connect('http://192.168.1.104:2777/');
+  socket.on('OnlineService', (data) => {
+    socket.emit('isOnline', { user: "Antonio", path: document.location.pathname });
+  });
+  socket.on('Online', (data) => {console.log('data', data)})
+</script>
+</html>
