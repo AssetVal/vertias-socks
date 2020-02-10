@@ -26,11 +26,16 @@ io.on('connection', (socket) => {
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.on('isOnline', (data) => {
     console.log(data);
-    usersOnline.push(data);
+    if (usersOnline.filter(obj => obj.user === data.user).length > 0){
+      usersOnline = usersOnline.filter(obj => obj.user !== data.user);
+      usersOnline.push(data)
+    } else {
+      usersOnline.push(data);
+    }
     socket.emit('Online', usersOnline);
     socket.on('disconnect', () => {
       console.log(`${data.user} disconnected`);
-      usersOnline = usersOnline.filter(users => users.user !== data.user)
+      usersOnline = usersOnline.filter(obj => obj.user !== data.user)
     });
   });
 });
