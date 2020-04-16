@@ -16,7 +16,7 @@
     "@koa/multer": "^2.0.0",
     "@koa/router": "^8.0.2",
     "colors": "^1.4.0",
-    "dayjs": "^1.8.23",
+    "dayjs": "^1.8.24",
     "dotenv": "^8.2.0",
     "glob": "^7.1.5",
     "he": "^1.2.0",
@@ -27,8 +27,8 @@
     "koa-body": "^4.1.1",
     "koa-helmet": "^5.2.0",
     "koa-logger": "^3.2.1",
-    "mongoose": "^5.9.7",
-    "nodemon": "^2.0.2",
+    "mongoose": "^5.9.9",
+    "nodemon": "^2.0.3",
     "pm2": "^4.1.2",
     "socket.io": "^2.3.0",
     "util": "^0.12.2"
@@ -44,7 +44,7 @@
     "eslint-plugin-security": "^1.4.0",
     "mocha": "^7.1.1",
     "nyc": "^15.0.1",
-    "snyk": "^1.305.0"
+    "snyk": "^1.305.1"
   },
   "eslintConfig": {
     "plugins": [
