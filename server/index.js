@@ -18,21 +18,21 @@ app.use(cors());
 
 routing(app); // Start Routes
 
-const server = require('http').createServer(app.callback()),
-  io = require('socket.io')(server);
+const server = require('http').createServer(app.callback());
+const io = require('socket.io')(server);
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
 let usersOnline = [];
 io.on('connection', (socket) => {
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.on('isOnline', (data) => {
-    console.log(data);
+    console.log('Recieved =>', data);
     if (usersOnline.filter(obj => obj.user === data.user).length > 0){
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
       usersOnline.push(data);
     } else {
       usersOnline.push(data);
     }
-    socket.emit('Online', usersOnline);
+    socket.emit('Online', {users: usersOnline, raw: data});
     socket.on('disconnect', () => {
       console.log(`${data.user} disconnected`);
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
