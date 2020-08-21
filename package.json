@@ -36,15 +36,15 @@
   "devDependencies": {
     "@getify/eslint-plugin-proper-ternary": "^3.0.1",
     "codacy-coverage": "^3.4.0",
-    "eslint": "^7.5.0",
+    "eslint": "^7.7.0",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-security": "^1.4.0",
-    "mocha": "^8.0.1",
+    "mocha": "^8.1.1",
     "nyc": "^15.1.0",
-    "snyk": "^1.368.1"
+    "snyk": "^1.381.1"
   },
   "eslintConfig": {
     "plugins": [
