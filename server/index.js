@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
     } else {
       usersOnline.push(data);
     }
-    socket.emit('Online', {users: usersOnline, raw: data});
+    socket.emit('Online', usersOnline);
     socket.on('disconnect', () => {
       console.log(`${data.user} disconnected`);
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
