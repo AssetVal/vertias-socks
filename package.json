@@ -16,7 +16,7 @@
     "@koa/multer": "^3.0.0",
     "@koa/router": "^9.3.1",
     "colors": "^1.4.0",
-    "dayjs": "^1.8.30",
+    "dayjs": "^1.8.35",
     "dotenv": "^8.2.0",
     "glob": "^7.1.5",
     "he": "^1.2.0",
@@ -27,7 +27,7 @@
     "koa-body": "^4.2.0",
     "koa-helmet": "^5.2.0",
     "koa-logger": "^3.2.1",
-    "mongoose": "^5.9.26",
+    "mongoose": "^5.10.2",
     "nodemon": "^2.0.3",
     "pm2": "^4.4.0",
     "socket.io": "^2.3.0",
@@ -36,15 +36,15 @@
   "devDependencies": {
     "@getify/eslint-plugin-proper-ternary": "^3.0.1",
     "codacy-coverage": "^3.4.0",
-    "eslint": "^7.7.0",
+    "eslint": "^7.8.1",
     "eslint-config-airbnb-base": "^14.2.0",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-plugin-import": "^2.22.0",
     "eslint-plugin-node": "^11.1.0",
     "eslint-plugin-security": "^1.4.0",
-    "mocha": "^8.1.1",
+    "mocha": "^8.1.3",
     "nyc": "^15.1.0",
-    "snyk": "^1.381.1"
+    "snyk": "^1.388.0"
   },
   "eslintConfig": {
     "plugins": [
