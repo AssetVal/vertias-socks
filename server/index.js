@@ -13,7 +13,16 @@ const app = new Koa(); // Create Koa Server
 
 app.use(logger());
 app.use(koaBody());
-app.use(helmet()); // Invoke Middleware
+app.use(helmet.dnsPrefetchControl());
+app.use(helmet.expectCt());
+app.use(helmet.frameguard());
+app.use(helmet.hidePoweredBy());
+app.use(helmet.hsts());
+app.use(helmet.ieNoOpen());
+app.use(helmet.noSniff());
+app.use(helmet.permittedCrossDomainPolicies());
+app.use(helmet.referrerPolicy());
+app.use(helmet.xssFilter());
 app.use(cors());
 
 routing(app); // Start Routes
