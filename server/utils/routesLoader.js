@@ -6,18 +6,18 @@ module.exports = function(dirname) {
     glob(
       `${dirname}/*`,
       {
-        ignore: '**/routeHandler.js'
+        ignore: '**/routeHandler.js',
       },
       (err, files) => {
         if (err) {
           return reject(err);
         }
-        files.forEach(file => {
+        files.forEach((file) => {
           const route = require(file); // eslint-disable-line global-require, import/no-dynamic-require
           routes.push(route);
         });
         return resolve(routes);
-      }
+      },
     );
   });
 };

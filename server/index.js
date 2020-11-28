@@ -31,9 +31,9 @@ const io = require('socket.io')(server);
 const routing = require('./routes/routeHandler.js');
 routing(app); // Start Routes
 
-app.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', 'https://www.assetval.club/'); // update to match the domain you will make the request from
-  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+app.use((ctx, next) => {
+  ctx.res.header('Access-Control-Allow-Origin', 'https://www.assetval.club/'); // update to match the domain you will make the request from
+  ctx.res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
   next();
 });
 
