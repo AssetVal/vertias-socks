@@ -31,6 +31,12 @@ const io = require('socket.io')(server);
 const routing = require('./routes/routeHandler.js');
 routing(app); // Start Routes
 
+app.use((req, res, next) => {
+  res.header('Access-Control-Allow-Origin', 'https://www.assetval.club/'); // update to match the domain you will make the request from
+  res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
 let usersOnline = [];
 io.on('connection', (socket) => {
