@@ -25,17 +25,17 @@ app.use(helmet.referrerPolicy());
 app.use(helmet.xssFilter());
 app.use(cors());
 
+app.use((ctx, next) => {
+  ctx.response.header('Access-Control-Allow-Origin', 'https://www.assetval.club/'); // update to match the domain you will make the request from
+  ctx.response.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
+  next();
+});
+
 const server = require('http').createServer(app.callback());
 const io = require('socket.io')(server);
 
 const routing = require('./routes/routeHandler.js');
 routing(app); // Start Routes
-
-app.use((ctx, next) => {
-  ctx.res.header('Access-Control-Allow-Origin', 'https://www.assetval.club/'); // update to match the domain you will make the request from
-  ctx.res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
-  next();
-});
 
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
 let usersOnline = [];
