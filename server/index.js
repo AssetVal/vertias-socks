@@ -19,6 +19,8 @@ const io = new Server(server, {
   cors: {
     origin: ['https://www.assetval.club', 'http://192.168.56.1:5000'],
     methods: ['GET', 'POST'],
+    allowedHeaders: ['assetcat-the-wondercat'],
+    credentials: true,
   },
 });
 
