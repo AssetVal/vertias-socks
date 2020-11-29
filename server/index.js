@@ -12,8 +12,9 @@ app.use(logger());
 app.use(koaBody());
 app.use(cors({
   origin: '*',
+  method: 'OPTIONS',
 }));
-//app.use(helmet());
+app.use(helmet());
 
 const server = require('http').createServer(app.callback());
 const {Server} = require('socket.io');
@@ -29,7 +30,7 @@ let usersOnline = [];
 io.on('connection', (socket) => {
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.on('isOnline', (data) => {
-    console.log('Recieved =>', data);
+    console.log('Received =>', data);
     if (usersOnline.filter(obj => obj.user === data.user).length > 0){
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
       usersOnline.push(data);
