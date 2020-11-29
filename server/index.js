@@ -10,22 +10,13 @@ const app = new Koa(); // Create Koa Server
 
 app.use(logger());
 app.use(koaBody());
-app.use(helmet.dnsPrefetchControl());
-app.use(helmet.expectCt());
-app.use(helmet.frameguard());
-app.use(helmet.hidePoweredBy());
-app.use(helmet.hsts());
-app.use(helmet.ieNoOpen());
-app.use(helmet.noSniff());
-app.use(helmet.permittedCrossDomainPolicies());
-app.use(helmet.referrerPolicy());
-app.use(helmet.xssFilter());
 app.use(cors({
-  origin: 'assetval.club',
+  origin: '*',
 }));
 
 const server = require('http').createServer(app.callback());
-const io = require('socket.io')(server);
+const {Server} = require('socket.io');
+const io = new Server(server);
 
 const routing = require('./routes/routeHandler.js');
 const {port, mongo} = require('./utils/port.js');
