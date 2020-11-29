@@ -13,18 +13,7 @@ app.use(koaBody());
 app.use(cors({
   origin: '*',
 }));
-app.use(helmet.dnsPrefetchControl());
-app.use(helmet.expectCt());
-app.use(helmet.frameguard());
-app.use(helmet.hidePoweredBy());
-app.use(helmet.hsts());
-app.use(helmet.ieNoOpen());
-app.use(helmet.noSniff());
-app.use(helmet.permittedCrossDomainPolicies());
-app.use(helmet.referrerPolicy({
-  policy: ['strict-origin-when-cross-origin', 'no-referrer'],
-}));
-app.use(helmet.xssFilter());
+//app.use(helmet());
 
 const server = require('http').createServer(app.callback());
 const {Server} = require('socket.io');
