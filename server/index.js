@@ -22,7 +22,7 @@ app.use(helmet.ieNoOpen());
 app.use(helmet.noSniff());
 app.use(helmet.permittedCrossDomainPolicies());
 app.use(helmet.referrerPolicy({
-  policy: ['origin', 'unsafe-url'],
+  policy: ['strict-origin-when-cross-origin', 'no-referrer'],
 }));
 app.use(helmet.xssFilter());
 
