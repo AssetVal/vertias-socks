@@ -18,9 +18,10 @@ const {Server} = require('socket.io');
 const io = new Server(server, {
   cors: {
     origin: [
-      'https://www.assetval.club', // Staging server
-      'http://192.168.56.1:5000',  // Antonio Home
-      'http://192.168.245.108:5000'// Antonio Work
+      'https://www.assetval.club',   // Staging server
+      'http://192.168.56.1:5000',    // Antonio Home
+      'http://192.168.245.108:5000', // Antonio Work
+      'http://192.168.245.111:5000'  // Kyle Work
     ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['assetcat-the-wondercat'],
