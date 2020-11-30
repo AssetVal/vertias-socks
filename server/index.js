@@ -17,7 +17,11 @@ const server = require('http').createServer(app.callback());
 const {Server} = require('socket.io');
 const io = new Server(server, {
   cors: {
-    origin: ['https://www.assetval.club', 'http://192.168.56.1:5000'],
+    origin: [
+      'https://www.assetval.club', // Staging server
+      'http://192.168.56.1:5000',  // Antonio Home
+      'http://192.168.245.108:5000/' // Antonio Work
+    ],
     methods: ['GET', 'POST'],
     allowedHeaders: ['assetcat-the-wondercat'],
     credentials: true,
