@@ -23,20 +23,20 @@
     "http": "0.0.1-security",
     "import-glob": "^1.5.0",
     "ip": "^1.1.5",
-    "koa": "^2.13.0",
+    "koa": "^2.13.1",
     "koa-body": "^4.2.0",
     "koa-helmet": "^6.0.0",
     "koa-logger": "^3.2.1",
     "mongoose": "^5.11.5",
-    "nodemon": "^2.0.6",
-    "pm2": "^4.5.0",
+    "nodemon": "^2.0.7",
+    "pm2": "^4.5.1",
     "socket.io": "^3.0.4",
     "util": "^0.12.2"
   },
   "devDependencies": {
     "@getify/eslint-plugin-proper-ternary": "^3.0.1",
     "codacy-coverage": "^3.4.0",
-    "eslint": "^7.15.0",
+    "eslint": "^7.17.0",
     "eslint-config-airbnb-base": "^14.2.1",
     "eslint-import-resolver-node": "^0.3.4",
     "eslint-plugin-import": "^2.22.1",
@@ -44,7 +44,7 @@
     "eslint-plugin-security": "^1.4.0",
     "mocha": "^8.2.1",
     "nyc": "^15.1.0",
-    "snyk": "^1.434.3"
+    "snyk": "^1.437.3"
   },
   "engines": {
     "node": "14.15.1",
