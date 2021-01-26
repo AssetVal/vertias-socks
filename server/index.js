@@ -37,11 +37,10 @@ routing(app); // Start Routes
 
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
 
-const users = {}
-
 let usersOnline = [];
 
 io.on('connection', (socket) => {
+  socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.on('isOnline', (data) => {
     console.log('Received =>', data);
     if (usersOnline.filter(obj => obj.user === data.user).length > 0){
@@ -54,12 +53,11 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
       console.log(`${data.user} disconnected`);
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
-      socket.disconnect()
     });
   });
+});
 
 /*
-
   socket.on('openedPage', (data) => {
     users[data.user].push({path: data.path, timestamp: data.lastRequest})
   })
@@ -77,6 +75,5 @@ io.on('connection', (socket) => {
     socket.disconnect()
   })
   */
-});
 
 module.exports = app;
