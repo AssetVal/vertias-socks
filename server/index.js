@@ -43,21 +43,21 @@ io.on('connection', (socket) => {
   const userPayload = socket.handshake.query;
 
   if (!users[userPayload.user]){
-    users[userPayload.user] = {
-      lastRequest: userPayload.lastRequest,
-      paths: [userPayload.path]
-    }
+    users[userPayload.user] = [{path: userPayload.path, timestamp: userPayload.lastRequest}]
   } else {
-    users[userPayload.user].lastRequest = userPayload.lastRequest;
-    users[userPayload.user].paths.push(userPayload.path)
+    users[userPayload.user].push({path: userPayload.path, timestamp: userPayload.lastRequest})
   }
 
+  socket.on('openedPage', (data) => {
+    users[data.user].push({path: data.path, timestamp: data.lastRequest})
+  })
 
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.emit('online', users);
 
   socket.on('disconnect', (reason) => {
-    users[userPayload.user].paths = users[userPayload.user].paths.filter(path => path !== userPayload.path);
+    console.log('reason', reason)
+    users[userPayload.user] = users[userPayload.user].filter(page => page.path !== userPayload.path);
     if (users[userPayload.user].paths.length === 0){
       delete users[userPayload.user]
       socket.emit('offline', users)
