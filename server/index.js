@@ -39,14 +39,26 @@ server.listen(port, () => { console.log(`Server is now running on http://${ip.ad
 
 const users = {}
 
-io.on('connection', (socket) => {
-  const userPayload = socket.handshake.query;
+let usersOnline = [];
 
-  if (!users[userPayload.user]){
-    users[userPayload.user] = [{path: userPayload.path, timestamp: userPayload.lastRequest}]
-  } else {
-    users[userPayload.user].push({path: userPayload.path, timestamp: userPayload.lastRequest})
-  }
+io.on('connection', (socket) => {
+  socket.on('isOnline', (data) => {
+    console.log('Received =>', data);
+    if (usersOnline.filter(obj => obj.user === data.user).length > 0){
+      usersOnline = usersOnline.filter(obj => obj.user !== data.user);
+      usersOnline.push(data);
+    } else {
+      usersOnline.push(data);
+    }
+    socket.emit('Online', usersOnline);
+    socket.on('disconnect', () => {
+      console.log(`${data.user} disconnected`);
+      usersOnline = usersOnline.filter(obj => obj.user !== data.user);
+      socket.disconnect()
+    });
+  });
+
+/*
 
   socket.on('openedPage', (data) => {
     users[data.user].push({path: data.path, timestamp: data.lastRequest})
@@ -64,21 +76,6 @@ io.on('connection', (socket) => {
     }
     socket.disconnect()
   })
-/*
-  socket.on('isOnline', (data) => {
-    console.log('Received =>', data);
-    if (usersOnline.filter(obj => obj.user === data.user).length > 0){
-      usersOnline = usersOnline.filter(obj => obj.user !== data.user);
-      usersOnline.push(data);
-    } else {
-      usersOnline.push(data);
-    }
-    socket.emit('Online', usersOnline);
-    socket.on('disconnect', () => {
-      console.log(`${data.user} disconnected`);
-      usersOnline = usersOnline.filter(obj => obj.user !== data.user);
-    });
-  });
   */
 });
 
