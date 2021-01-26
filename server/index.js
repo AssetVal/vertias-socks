@@ -36,9 +36,35 @@ mongoose.connect(mongo.uri, mongo.config).catch(err => console.error); // Create
 routing(app); // Start Routes
 
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
-let usersOnline = [];
+
+const users = {}
+
 io.on('connection', (socket) => {
+  const userPayload = socket.handshake.query;
+
+  if (!users[userPayload.user]){
+    users[userPayload.user] = {
+      lastRequest: userPayload.lastRequest,
+      paths: [userPayload.path]
+    }
+  } else {
+    users[userPayload.user].lastRequest = userPayload.lastRequest;
+    users[userPayload.user].paths.push(userPayload.path)
+  }
+
+
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
+  socket.emit('online', users);
+
+  socket.on('disconnect', (reason) => {
+    users[userPayload.user].paths = users[userPayload.user].paths.filter(path => path !== userPayload.path);
+    if (users[userPayload.user].paths.length === 0){
+      delete users[userPayload.user]
+      socket.emit('offline', users)
+    }
+    socket.disconnect()
+  })
+/*
   socket.on('isOnline', (data) => {
     console.log('Received =>', data);
     if (usersOnline.filter(obj => obj.user === data.user).length > 0){
@@ -53,6 +79,7 @@ io.on('connection', (socket) => {
       usersOnline = usersOnline.filter(obj => obj.user !== data.user);
     });
   });
+  */
 });
 
 module.exports = app;
