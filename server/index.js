@@ -36,7 +36,9 @@ mongoose.connect(mongo.uri, mongo.config).catch(err => console.error); // Create
 routing(app); // Start Routes
 
 server.listen(port, () => { console.log(`Server is now running on http://${ip.address()}:${port}`); }); // Start the server
+
 let usersOnline = [];
+
 io.on('connection', (socket) => {
   socket.emit('OnlineService', {AuthCheckIsOnline: true});
   socket.on('isOnline', (data) => {
@@ -54,5 +56,24 @@ io.on('connection', (socket) => {
     });
   });
 });
+
+/*
+  socket.on('openedPage', (data) => {
+    users[data.user].push({path: data.path, timestamp: data.lastRequest})
+  })
+
+  socket.emit('OnlineService', {AuthCheckIsOnline: true});
+  socket.emit('online', users);
+
+  socket.on('disconnect', (reason) => {
+    console.log('reason', reason)
+    users[userPayload.user] = users[userPayload.user].filter(page => page.path !== userPayload.path);
+    if (users[userPayload.user].paths.length === 0){
+      delete users[userPayload.user]
+      socket.emit('offline', users)
+    }
+    socket.disconnect()
+  })
+  */
 
 module.exports = app;
